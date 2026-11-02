@@ -1,0 +1,287 @@
+/* ==========================================================================
+   EXPERIMENT 8: DEVELOPING SERVER-SIDE APPLICATION USING NODE.JS
+   Web Technology Lab — Semester 5
+   Visual Identity: TechPulse (Matching Experiments 1–6 Palette & Typography)
+   ========================================================================== */
+
+/* --------------------------------------------------------------------------
+   Reset & Base Styles
+   -------------------------------------------------------------------------- */
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    font-family: Arial, Helvetica, sans-serif;
+    line-height: 1.6;
+    color: #183B4E;
+    background-color: #EAF4F8;
+    min-height: 100vh;
+    padding: 30px 16px;
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+}
+
+/* --------------------------------------------------------------------------
+   Container & Card
+   -------------------------------------------------------------------------- */
+.container {
+    width: 100%;
+    max-width: 780px;
+}
+
+.header {
+    background-color: #123B5D;
+    color: #FFFFFF;
+    text-align: center;
+    padding: 26px 20px;
+    border-top-left-radius: 8px;
+    border-top-right-radius: 8px;
+}
+
+.header h1 {
+    font-size: 2rem;
+    margin-bottom: 4px;
+    letter-spacing: -0.5px;
+}
+
+.header p {
+    color: #D9EEF7;
+    font-size: 1.05rem;
+}
+
+.card {
+    background-color: #FFFFFF;
+    border: 1px solid #C5DFE8;
+    border-top: none;
+    border-bottom-left-radius: 8px;
+    border-bottom-right-radius: 8px;
+    padding: 30px 28px;
+    box-shadow: 0 4px 16px rgba(18, 59, 93, 0.1);
+}
+
+/* --------------------------------------------------------------------------
+   Status Banner
+   -------------------------------------------------------------------------- */
+.status-banner {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    background-color: #F8FBFD;
+    border: 1px solid #D6E8EE;
+    border-left: 5px solid #2E7D32;
+    padding: 12px 18px;
+    border-radius: 6px;
+    margin-bottom: 24px;
+    font-size: 0.95rem;
+}
+
+.status-indicator {
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+    background-color: #2E7D32;
+    box-shadow: 0 0 0 3px rgba(46, 125, 50, 0.25);
+    display: inline-block;
+}
+
+.status-badge {
+    padding: 3px 10px;
+    border-radius: 4px;
+    font-size: 0.85rem;
+    font-weight: bold;
+    text-transform: uppercase;
+}
+
+.status-badge.active {
+    background-color: #E8F5E9;
+    color: #1B5E20;
+    border: 1px solid #C8E6C9;
+}
+
+/* --------------------------------------------------------------------------
+   Section Headings
+   -------------------------------------------------------------------------- */
+h2 {
+    color: #123B5D;
+    font-size: 1.25rem;
+    margin-bottom: 12px;
+    padding-bottom: 6px;
+    border-bottom: 2px solid #E1EDF2;
+}
+
+h3 {
+    color: #123B5D;
+    font-size: 1.05rem;
+    margin-bottom: 10px;
+}
+
+/* --------------------------------------------------------------------------
+   Server Information Grid
+   -------------------------------------------------------------------------- */
+.info-section {
+    margin-bottom: 28px;
+}
+
+.info-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
+    gap: 12px;
+}
+
+.info-box {
+    background-color: #FCFDFD;
+    border: 1px solid #D6E8EE;
+    border-radius: 6px;
+    padding: 14px 16px;
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+}
+
+.info-label {
+    font-size: 0.8rem;
+    font-weight: bold;
+    color: #557280;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+
+.info-value {
+    font-size: 1.05rem;
+    font-weight: bold;
+    color: #123B5D;
+}
+
+/* --------------------------------------------------------------------------
+   API Endpoints Table
+   -------------------------------------------------------------------------- */
+.endpoints-section {
+    margin-bottom: 28px;
+}
+
+.endpoints-table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 0.92rem;
+    margin-top: 8px;
+}
+
+.endpoints-table th,
+.endpoints-table td {
+    padding: 12px 14px;
+    text-align: left;
+    border-bottom: 1px solid #E1EDF2;
+}
+
+.endpoints-table th {
+    background-color: #EAF4F8;
+    color: #123B5D;
+    font-weight: bold;
+}
+
+.endpoints-table tr:hover td {
+    background-color: #F8FBFD;
+}
+
+.endpoints-table code {
+    background-color: #E8EFF2;
+    padding: 3px 6px;
+    border-radius: 4px;
+    font-family: Consolas, Monaco, monospace;
+    font-size: 0.88rem;
+    color: #0E4B75;
+}
+
+/* Badges */
+.badge {
+    display: inline-block;
+    padding: 3px 8px;
+    border-radius: 4px;
+    font-size: 0.75rem;
+    font-weight: bold;
+    font-family: Consolas, Monaco, monospace;
+}
+
+.badge-get {
+    background-color: #E8F5E9;
+    color: #2E7D32;
+    border: 1px solid #A5D6A7;
+}
+
+.badge-post {
+    background-color: #E8F4F8;
+    color: #123B5D;
+    border: 1px solid #A8CCD7;
+}
+
+/* Action Links */
+.btn-link {
+    display: inline-block;
+    color: #005B96;
+    text-decoration: none;
+    font-weight: bold;
+    font-size: 0.85rem;
+    padding: 3px 8px;
+    border-radius: 3px;
+    transition: background-color 0.2s ease;
+}
+
+.btn-link:hover {
+    background-color: #EAF4F8;
+    text-decoration: underline;
+}
+
+.text-muted {
+    color: #8CA3B0;
+    font-size: 0.85rem;
+    font-style: italic;
+}
+
+/* --------------------------------------------------------------------------
+   Sample Payload Box
+   -------------------------------------------------------------------------- */
+.sample-section {
+    margin-top: 10px;
+}
+
+.code-box {
+    background-color: #123B5D;
+    color: #D9EEF7;
+    padding: 14px 16px;
+    border-radius: 6px;
+    font-family: Consolas, Monaco, monospace;
+    font-size: 0.86rem;
+    overflow-x: auto;
+    line-height: 1.5;
+}
+
+/* --------------------------------------------------------------------------
+   Responsive Design
+   -------------------------------------------------------------------------- */
+@media screen and (max-width: 600px) {
+    body {
+        padding: 12px;
+    }
+
+    .card {
+        padding: 20px 16px;
+    }
+
+    .header h1 {
+        font-size: 1.6rem;
+    }
+
+    .info-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .endpoints-table th,
+    .endpoints-table td {
+        padding: 8px 10px;
+        font-size: 0.85rem;
+    }
+}

@@ -1,0 +1,11 @@
+{
+  "name": "wt-lab-exp8",
+  "version": "1.0.0",
+  "description": "Web Technology Lab Exp 8 - Developing Server Side Application using Node.js HTTP",
+  "main": "server.js",
+  "scripts": {
+    "start": "node server.js"
+  },
+  "author": "",
+  "license": "ISC"
+}
